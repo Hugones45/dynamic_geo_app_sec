@@ -67,7 +67,9 @@
 
         Search
       ) {
-        esriConfig.apiKey = import.meta.env.VITE_API_KEY;
+        const apiKey = import.meta.env.VITE_API_KEY;
+
+        esriConfig.apiKey = apiKey;
 
         // Replace with your actual API key
         esriConfig.locale = "pt-BR"; // Set locale to Brazilian Portuguese
