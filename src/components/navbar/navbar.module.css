@@ -1,0 +1,36 @@
+.main_container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+    background: rgb(164, 164, 210);
+    background-image: url("/public/map_for_test.jpg");
+    align-items: center;
+    width: 100%;
+}
+
+.nav_links {
+    color: #fff;
+    text-decoration: none; /* Remove the underline by default */
+    transition: text-decoration 0.2s ease; /* Smooth transition for hover effect */
+    padding: 5px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    flex-shrink: 0; /* Prevent shrinking of the nav links */
+
+}
+
+.nav_links:hover {
+    text-decoration: underline; /* Add underline on hover */
+    text-underline-offset: 2px; /* Move the underline further below the text */
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    
+}
+
+.active {
+    background-color: #fff; /* Active link background */
+    color: #000; /* Active link text */
+    border-radius: 5px;
+    text-decoration: none; /* Remove underline */
+    padding: 5px;
+}

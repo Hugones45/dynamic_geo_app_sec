@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>ArcGIS Maps SDK para JavaScript: Pesquisa e Rota</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+      #clearButton {
+        position: absolute;
+        left: 10px;
+        bottom: 20px;
+        padding: 8px 12px;
+        background-color: white;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.30/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.30/"></script>
+    <script
+      type="module"
+      src="https://js.arcgis.com/calcite-components/2.11.1/calcite.esm.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://js.arcgis.com/calcite-components/2.11.1/calcite.css"
+    />
+    <script src="https://js.arcgis.com/4.30/"></script>
+
+    <script type="module">
+      require([
+        "esri/config",
+        "esri/Map",
+        "esri/views/MapView",
+
+        "esri/Graphic",
+        "esri/rest/route",
+        "esri/rest/support/RouteParameters",
+        "esri/rest/support/FeatureSet",
+
+        "esri/widgets/Search",
+      ], function (
+        esriConfig,
+        Map,
+        MapView,
+
+        Graphic,
+        route,
+        RouteParameters,
+        FeatureSet,
+
+        Search
+      ) {
+        esriConfig.apiKey = import.meta.env.VITE_API_KEY;
+
+        // Replace with your actual API key
+        esriConfig.locale = "pt-BR"; // Set locale to Brazilian Portuguese
+
+        const map = new Map({
+          basemap: "arcgis/colored-pencil",
+        });
+
+        const view = new MapView({
+          map: map,
+          center: [-46.93300558522342, -19.59485970040308],
+          zoom: 13,
+          container: "viewDiv",
+        });
+
+        const updateBasemapStyle = (basemapId) => {
+          view.map.basemap = basemapId;
+        };
+
+        const basemapStylesDiv = document.getElementById("basemapStyles");
+        view.ui.add(basemapStylesDiv, "top-left");
+
+        const styleCombobox = document.getElementById("styleCombobox");
+        styleCombobox.addEventListener("calciteComboboxChange", (event) => {
+          updateBasemapStyle(event.target.value);
+        });
+
+        const routeUrl =
+          "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
+
+        view.on("click", function (event) {
+          if (view.graphics.length === 0) {
+            addGraphic("origin", event.mapPoint);
+          } else if (view.graphics.length === 1) {
+            addGraphic("destination", event.mapPoint);
+            getRoute();
+          } else {
+            view.graphics.removeAll();
+            addGraphic("origin", event.mapPoint);
+          }
+        });
+
+        function addGraphic(type, point) {
+          const graphic = new Graphic({
+            symbol: {
+              type: "simple-marker",
+              color: type === "origin" ? "white" : "black",
+              size: "8px",
+            },
+            geometry: point,
+          });
+          view.graphics.add(graphic);
+        }
+
+        function getRoute() {
+          const routeParams = new RouteParameters({
+            stops: new FeatureSet({
+              features: view.graphics.toArray(),
+            }),
+            returnDirections: true,
+            directionsLanguage: "pt-BR", // Set directions language to Portuguese
+          });
+
+          route
+            .solve(routeUrl, routeParams)
+            .then(function (data) {
+              data.routeResults.forEach(function (result) {
+                result.route.symbol = {
+                  type: "simple-line",
+                  color: [5, 150, 255],
+                  width: 3,
+                };
+                view.graphics.add(result.route);
+              });
+
+              if (data.routeResults.length > 0) {
+                const directions = document.createElement("ol");
+                directions.classList =
+                  "esri-widget esri-widget--panel esri-directions__scroller";
+                directions.style.marginTop = "0";
+                directions.style.padding = "15px 15px 15px 30px";
+                const features = data.routeResults[0].directions.features;
+
+                features.forEach(function (result) {
+                  const direction = document.createElement("li");
+                  direction.innerHTML =
+                    result.attributes.text +
+                    " (" +
+                    result.attributes.length.toFixed(2) +
+                    " km)"; // Distance in kilometers
+                  directions.appendChild(direction);
+                });
+
+                view.ui.empty("top-right");
+                view.ui.add(directions, "top-right");
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+
+        const search = new Search({
+          view: view,
+        });
+
+        view.ui.add(search, "bottom-right");
+
+        document
+          .getElementById("clearButton")
+          .addEventListener("click", function () {
+            view.graphics.removeAll();
+            view.ui.empty("top-right");
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="viewDiv">
+      <button id="clearButton">Limpar Rota</button>
+    </div>
+    <div
+      id="basemapStyles"
+      class="esri-widget"
+      style="padding: 10px; width: 200px"
+    >
+      <calcite-label>Basemap style</calcite-label>
+      <calcite-combobox
+        id="styleCombobox"
+        selection-mode="single"
+        clear-disabled
+      >
+        <calcite-combobox-item
+          value="arcgis/navigation"
+          text-label="arcgis/navigation"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/navigation-night"
+          text-label="arcgis/navigation-night"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/streets"
+          text-label="arcgis/streets"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/streets-relief"
+          text-label="arcgis/streets-relief"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/streets-night"
+          text-label="arcgis/streets-night"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/outdoor"
+          text-label="arcgis/outdoor"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/imagery"
+          text-label="arcgis/imagery"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/topographic"
+          text-label="arcgis/topographic"
+          selected
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/terrain"
+          text-label="arcgis/terrain"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/oceans"
+          text-label="arcgis/oceans"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/light-gray"
+          text-label="arcgis/light-gray"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/dark-gray"
+          text-label="arcgis/dark-gray"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/human-geography"
+          text-label="arcgis/human-geography"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/human-geography-dark"
+          text-label="arcgis/human-geography-dark"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/charted-territory"
+          text-label="arcgis/charted-territory"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/colored-pencil"
+          text-label="arcgis/colored-pencil"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/nova"
+          text-label="arcgis/nova"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/modern-antique"
+          text-label="arcgis/modern-antique"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/midcentury"
+          text-label="arcgis/midcentury"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="arcgis/newspaper"
+          text-label="arcgis/newspaper"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="osm/standard"
+          text-label="osm/standard"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="osm/standard-relief"
+          text-label="osm/standard-relief"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="osm/navigation"
+          text-label="osm/navigation"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="osm/navigation-dark"
+          text-label="osm/navigation-dark"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="osm/streets"
+          text-label="osm/streets"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="osm/hybrid"
+          text-label="osm/hybrid"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="osm/light-gray"
+          text-label="osm/light-gray"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="osm/dark-gray"
+          text-label="osm/dark-gray"
+        ></calcite-combobox-item>
+        <calcite-combobox-item
+          value="osm/blueprint"
+          text-label="osm/blueprint"
+        ></calcite-combobox-item>
+      </calcite-combobox>
+    </div>
+  </body>
+</html>
