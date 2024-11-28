@@ -1,10 +1,14 @@
 import styles from "./esri_sdk.module.css"
 
 const Esri_sdk = () => {
+
+    const isDevelopment = import.meta.env.MODE === 'development';
+
+
     return (
         <div className={styles.main_container}>
             <iframe
-                src="/public/maps/esri_javascript_sdk/index.html"
+                src={isDevelopment ? "/public/maps/esri_javascript_sdk/index.html" : "/maps/esri_javascript_sdk/index.html"}
                 title="Map"
                 style={{
                     width: "100%",
