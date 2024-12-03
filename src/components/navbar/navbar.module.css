@@ -6,6 +6,8 @@
     background-image: url("/public/map_for_test.jpg");
     align-items: center;
     width: 100%;
+    position: absolute;
+    z-index: 10;
 }
 
 .nav_links {

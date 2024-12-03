@@ -26,6 +26,9 @@
         border: 1px solid #ccc;
         cursor: pointer;
       }
+      .esri-component.esri-zoom {
+        margin-top: 150px; /* Adjust this value as needed */
+      }
     </style>
     <link
       rel="stylesheet"
@@ -59,12 +62,10 @@
         esriConfig,
         Map,
         MapView,
-
         Graphic,
         route,
         RouteParameters,
         FeatureSet,
-
         Search
       ) {
         esriConfig.apiKey =
@@ -148,7 +149,7 @@
                 const directions = document.createElement("ol");
                 directions.classList =
                   "esri-widget esri-widget--panel esri-directions__scroller";
-                directions.style.marginTop = "0";
+                directions.style.marginTop = "80px";
                 directions.style.padding = "15px 15px 15px 30px";
                 const features = data.routeResults[0].directions.features;
 
@@ -195,7 +196,7 @@
     <div
       id="basemapStyles"
       class="esri-widget"
-      style="padding: 10px; width: 200px"
+      style="padding: 10px; width: 200px; margin-top: 30px"
     >
       <calcite-label>Basemap style</calcite-label>
       <calcite-combobox

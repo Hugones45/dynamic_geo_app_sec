@@ -21,7 +21,7 @@ const PopDensety = () => {
                 onClick={() => setFlip((prevState) => !prevState)}
                 style={{
                     position: "absolute",
-                    bottom: "93%", // Position the button above the map container
+                    top: '80px',
                     left: "50%",
                     transform: "translateX(-50%)",
                     zIndex: 10, // Make sure the button is always on top of the card
@@ -37,7 +37,7 @@ const PopDensety = () => {
                 Flip Card
             </button>
 
-            <div className="App" style={{ position: "relative" }}>
+            <div className="App" style={{ position: "relative", top: '50px', zIndex: '1' }}>
                 <motion.div
                     className="card-container"
                     style={{

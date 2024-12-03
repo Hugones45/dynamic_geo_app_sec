@@ -1,0 +1,11 @@
+.leaflet-control-zoom-in{
+    margin-top: -10px;
+    position: relative;
+    top: 100px;
+    }
+    
+
+.leaflet-control-zoom-out {
+    position: relative;
+    top: 100px;
+}
