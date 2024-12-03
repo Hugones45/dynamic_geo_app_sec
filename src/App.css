@@ -18,3 +18,20 @@
     text-align: center;
   }
   
+  /* Global Reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensure the body takes up the full height */
+  width: 100%; /* Ensure the body takes up the full width */
+  overflow: hidden; /* Disable scrolling */
+}
+
+/* Optionally, add styles specific to the .main_container class */
+.main_container {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensure the main container fills the viewport */
+  width: 100%; /* Ensure the main container fills the viewport */
+  overflow: hidden; /* Prevent scrollbars */
+}
