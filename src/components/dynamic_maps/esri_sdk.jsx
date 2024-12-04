@@ -47,9 +47,7 @@ const Esri_sdk = () => {
             )}
             <iframe
                 src={
-                    isDevelopment
-                        ? "public/maps/esri_javascript_sdk/index.html"
-                        : "/maps/esri_javascript_sdk/index.html"
+                    "/maps/esri_javascript_sdk/index.html"
                 }
                 title="Map"
                 style={{

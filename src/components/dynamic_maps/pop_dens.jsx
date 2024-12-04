@@ -108,7 +108,7 @@ const PopDensety = () => {
 
                             <iframe
 
-                                src={isDevelopment ? "public/maps/population/index.html" : "maps/population/index.html"}
+                                src={"maps/population/index.html"}
 
                                 title="Map"
                                 style={{
