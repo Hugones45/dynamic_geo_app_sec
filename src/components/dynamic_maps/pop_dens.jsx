@@ -7,7 +7,6 @@ import { TbMapRoute } from "react-icons/tb";
 const PopDensety = () => {
     const [flip, setFlip] = useState(false);
     const [isLoading, setIsLoading] = useState(true); // State for loading
-    const isDevelopment = import.meta.env.MODE === "development";
 
     return (
         <div

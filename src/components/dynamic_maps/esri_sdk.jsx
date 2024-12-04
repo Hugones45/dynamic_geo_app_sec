@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const Esri_sdk = () => {
     const [isLoading, setIsLoading] = useState(true); // State for loading
-    const isDevelopment = import.meta.env.MODE === "development";
 
     return (
         <div className={styles.main_container} style={{ position: "relative" }}>

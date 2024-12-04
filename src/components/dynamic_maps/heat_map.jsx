@@ -3,9 +3,6 @@ import styles from "./heat_map.module.css"
 
 const Heat_map = () => {
 
-    const isDevelopment = import.meta.env.MODE === 'development';
-
-
     return (
         <div className={styles.main_container}>
             <iframe
