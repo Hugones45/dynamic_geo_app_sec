@@ -22,12 +22,12 @@ const PopDensety = () => {
         >
 
 
-            <button
+            {!isLoading && <button
                 onClick={() => setFlip((prevState) => !prevState)}
                 className={styles.the_button}
             >
                 Flip Card
-            </button>
+            </button>}
 
 
 
@@ -108,9 +108,7 @@ const PopDensety = () => {
 
                             <iframe
                                 src={
-                                    isDevelopment
-                                        ? "/src/assets/maps/population/index.html"
-                                        : "/maps/population/index.html"
+                                    "src/assets/maps/population/index.html"
                                 }
                                 title="Map"
                                 style={{
