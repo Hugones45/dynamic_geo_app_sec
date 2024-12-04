@@ -6,6 +6,7 @@ import Esri_sdk from './components/dynamic_maps/esri_sdk';
 import Heat_map from './components/dynamic_maps/heat_map';
 import NavBar from './components/navbar/Navbar';
 import PopDensety from './components/dynamic_maps/pop_dens';
+import Show_expla from './components/show_expla/show_expla';
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -54,6 +55,8 @@ function App() {
         <Route path="/" element={<Esri_sdk />} />
         <Route path="/heat_map" element={<Heat_map />} />
         <Route path="/population_map" element={<PopDensety />} />
+        <Route path="/about_projects" element={<Show_expla />} />
+
       </Routes>
     </div>
   );

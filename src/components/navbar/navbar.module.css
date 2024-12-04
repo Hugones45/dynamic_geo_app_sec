@@ -3,7 +3,7 @@
     justify-content: space-around;
     padding: 20px 0;
     background: rgb(164, 164, 210);
-    background-image: url("/public/map_for_test.jpg");
+    background-image: url("/map_for_test.jpg");
     align-items: center;
     width: 100%;
     position: absolute;
@@ -21,8 +21,6 @@
 }
 
 .nav_links:hover {
-    text-decoration: underline; /* Add underline on hover */
-    text-underline-offset: 2px; /* Move the underline further below the text */
     background-color: #fff;
     color: #000;
     border-radius: 5px;

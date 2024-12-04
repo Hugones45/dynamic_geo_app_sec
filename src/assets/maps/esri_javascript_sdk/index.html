@@ -72,7 +72,7 @@
           "AAPTxy8BH1VEsoebNVZXo8HurPwoFSGyYhkyuGDcswj_rj4NDfGgasnZQKFhOPdGEPzzFwg5GHhP0MRiwVwD46rsU8ghha_BkILHMCd8R7boEUbJ_OPSDjZZFwkxbDhgZR4OTyXkrrehwF3jzjHXDeV3GBBVodIEcUf3d0kzwm3aCIi4-szLyYFFkCkadAt6T3eah9UsNvdQUYjWlOtodGqT5gYQ3Z0i3Vau7cJCxuFXhw0.AT1_AclakAt2";
 
         // Replace with your actual API key
-        esriConfig.locale = "pt-BR"; // Set locale to Brazilian Portuguese
+        esriConfig.locale = "en"; // Set locale to Brazilian Portuguese
 
         const map = new Map({
           basemap: "arcgis/colored-pencil",
@@ -130,7 +130,7 @@
               features: view.graphics.toArray(),
             }),
             returnDirections: true,
-            directionsLanguage: "pt-BR", // Set directions language to Portuguese
+            directionsLanguage: "en", // Set directions language to Portuguese
           });
 
           route
@@ -191,7 +191,7 @@
   </head>
   <body>
     <div id="viewDiv">
-      <button id="clearButton">Limpar Rota</button>
+      <button id="clearButton">Clear the route</button>
     </div>
     <div
       id="basemapStyles"

@@ -1,11 +1,23 @@
-import styles from "./show_expla.modules.css"
+import styles from "./show_expla.module.css"
+
 
 const Show_expla = () => {
+
+
+
     return (
-        <div>
+        <div className={styles.main_container}
+            style={{
+                height: "100vh",
+                display: "flex",
+                position: "relative",
+
+            }}
+        >
 
 
 
+            <p style={{ marginTop: '100px' }}>sssssss</p>
         </div>
     )
 }

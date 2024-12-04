@@ -4,7 +4,7 @@ import styles from "./navbar.module.css";
 const NavBar = () => {
     return (
         <header className={styles.main_container}>
-            <div style={{ display: 'flex', gap: '10%' }}>
+            <div style={{ display: 'flex', gap: '10%', zIndex: 1 }}>
                 <NavLink
                     className={({ isActive }) =>
                         isActive ? `${styles.nav_links} ${styles.active}` : styles.nav_links
@@ -41,6 +41,7 @@ const NavBar = () => {
                     About the Projects
                 </NavLink>
             </div>
+
         </header>
     );
 };
