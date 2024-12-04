@@ -1,5 +1,5 @@
 import styles from "./pop_dens.module.css";
-import pop_dens from "../../../src/assets/maps/population/pop_den.png";
+import pop_dens from "../../../public/maps/population/pop_den.png";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { TbMapRoute } from "react-icons/tb";
@@ -107,9 +107,9 @@ const PopDensety = () => {
                             }}>MADE WITH FOLIUM</p>}
 
                             <iframe
-                                src={
-                                    "src/assets/maps/population/index.html"
-                                }
+
+                                src={isDevelopment ? "public/maps/population/index.html" : "maps/population/index.html"}
+
                                 title="Map"
                                 style={{
                                     width: "100%",

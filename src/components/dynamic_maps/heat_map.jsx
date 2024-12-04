@@ -9,7 +9,7 @@ const Heat_map = () => {
     return (
         <div className={styles.main_container}>
             <iframe
-                src={isDevelopment ? "/src/assets/maps/heat_map_air/index.html" : "/maps/heat_map_air/index.html"}
+                src={"maps/heat_map_air/index.html"}
 
                 title="Map"
                 style={{
