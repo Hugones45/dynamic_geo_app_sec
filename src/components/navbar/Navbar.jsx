@@ -1,13 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styles from "./navbar.module.css";
 import { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-
 import newHam from "../../assets/menu.svg"
 import close from "../../assets/close.svg"
-
-import { BsFillPersonLinesFill } from "react-icons/bs"
-import { BsFillMoonStarsFill } from "react-icons/bs"
 
 const NavBar = () => {
 
@@ -23,7 +18,7 @@ const NavBar = () => {
                     }
                     to="/"
                 >
-                    SDK MAP
+                    ESRI SDK MAP
                 </NavLink>
                 <NavLink
                     className={({ isActive }) =>
@@ -31,7 +26,7 @@ const NavBar = () => {
                     }
                     to="/heat_map"
                 >
-                    HEAT MAP
+                    AIR QUALITY
                 </NavLink>
                 <NavLink
                     className={({ isActive }) =>
@@ -39,7 +34,7 @@ const NavBar = () => {
                     }
                     to="/population_map"
                 >
-                    Population Map
+                    POP DENSETY MAP
                 </NavLink>
             </div>
 
@@ -50,7 +45,7 @@ const NavBar = () => {
                     }
                     to="/about_projects"
                 >
-                    About the Projects
+                    ABOUT THE PROJECTS
                 </NavLink>
             </div>
 
@@ -78,7 +73,7 @@ const NavBar = () => {
                             to="/"
                             onClick={() => setToggle(!toggle)}
                         >
-                            SDK MAP
+                            ESRI SDK MAP
                         </NavLink>
                         <NavLink
                             className={({ isActive }) =>
@@ -87,7 +82,7 @@ const NavBar = () => {
                             to="/heat_map"
                             onClick={() => setToggle(!toggle)}
                         >
-                            HEAT MAP
+                            AIR QUALITY
                         </NavLink>
                         <NavLink
                             className={({ isActive }) =>
@@ -96,7 +91,7 @@ const NavBar = () => {
                             to="/population_map"
                             onClick={() => setToggle(!toggle)}
                         >
-                            Population Map
+                            POP DENSETY MAP
                         </NavLink>
 
                         <NavLink
@@ -106,16 +101,11 @@ const NavBar = () => {
                             to="/about_projects"
                             onClick={() => setToggle(!toggle)}
                         >
-                            About the Projects
+                            ABOUT THE PROJECTS
                         </NavLink>
                     </div>
 
-
-
                 </div>}
-
-
-
             </div>
 
         </header>

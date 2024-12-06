@@ -15,10 +15,11 @@ const ExplanationCard = ({ image, text, link }) => {
                     src={image}
                     alt="Map"
                     onClick={() => navigate(link)}
+                    style={{ border: '2px solid black', borderRadius: '5px' }}
                 />
 
                 <div style={{
-                    background: 'lightblue',
+                    background: '#fff',
                     padding: '0 20px',
                     height: 'auto',
                     borderRadius: '5px'
