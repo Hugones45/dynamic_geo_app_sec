@@ -8,13 +8,15 @@ import NavBar from './components/navbar/Navbar';
 import PopDensety from './components/dynamic_maps/pop_dens';
 import Show_expla from './components/show_expla/show_expla';
 
+import fadeImage from "./components/show_expla/test1.jpg";
+
 function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -34,14 +36,29 @@ function App() {
             transition={{ duration: 1 }}
             className="splash-screen"
             onClick={handleClick}
+            style={{
+              backgroundImage: `url(${fadeImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              width: '100vw',
+              height: '100vh',
+            }}
           >
             <motion.h1
               className="splash-text"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 2 }}
+              style={{
+                color: 'black', // Set the text color to black
+                fontSize: '2.5rem',
+                textAlign: 'center',
+                background: "#fff",
+                padding: '10px',
+                borderRadius: '5px'
+              }}
             >
-              Welcome to the projects
+              Working with distances is working with horizons!
             </motion.h1>
           </motion.div>
         )}
@@ -56,7 +73,6 @@ function App() {
         <Route path="/heat_map" element={<Heat_map />} />
         <Route path="/population_map" element={<PopDensety />} />
         <Route path="/about_projects" element={<Show_expla />} />
-
       </Routes>
     </div>
   );
