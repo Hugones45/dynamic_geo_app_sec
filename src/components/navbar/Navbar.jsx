@@ -7,7 +7,7 @@ import close from "../../assets/close.svg"
 const NavBar = () => {
 
     const [active, setActive] = useState("")
-    const [toggle, setToggle] = useState(false)
+    const [toggle, setToggle] = useState(true)
 
     return (
         <header className={styles.main_container}>
@@ -63,49 +63,50 @@ const NavBar = () => {
 
                 </div>
 
-                {!toggle && <div className={styles.nav_container_shrik}>
+                {!toggle && (
+                    <div className={`${styles.nav_container_shrik} ${toggle ? styles.show : ""}`}>
+                        <div className={styles.nav_shirnk_items}>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? `${styles.nav_links} ${styles.active}` : styles.nav_links
+                                }
+                                to="/"
+                                onClick={() => setToggle(!toggle)}
+                            >
+                                ESRI SDK MAP
+                            </NavLink>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? `${styles.nav_links} ${styles.active}` : styles.nav_links
+                                }
+                                to="/heat_map"
+                                onClick={() => setToggle(!toggle)}
+                            >
+                                AIR QUALITY
+                            </NavLink>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? `${styles.nav_links} ${styles.active}` : styles.nav_links
+                                }
+                                to="/population_map"
+                                onClick={() => setToggle(!toggle)}
+                            >
+                                POP DENSITY MAP
+                            </NavLink>
 
-                    <div className={styles.nav_shirnk_items} >
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive ? `${styles.nav_links} ${styles.active}` : styles.nav_links
-                            }
-                            to="/"
-                            onClick={() => setToggle(!toggle)}
-                        >
-                            ESRI SDK MAP
-                        </NavLink>
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive ? `${styles.nav_links} ${styles.active}` : styles.nav_links
-                            }
-                            to="/heat_map"
-                            onClick={() => setToggle(!toggle)}
-                        >
-                            AIR QUALITY
-                        </NavLink>
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive ? `${styles.nav_links} ${styles.active}` : styles.nav_links
-                            }
-                            to="/population_map"
-                            onClick={() => setToggle(!toggle)}
-                        >
-                            POP DENSETY MAP
-                        </NavLink>
-
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive ? `${styles.nav_links} ${styles.active}` : styles.nav_links
-                            }
-                            to="/about_projects"
-                            onClick={() => setToggle(!toggle)}
-                        >
-                            ABOUT THE PROJECTS
-                        </NavLink>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? `${styles.nav_links} ${styles.active}` : styles.nav_links
+                                }
+                                to="/about_projects"
+                                onClick={() => setToggle(!toggle)}
+                            >
+                                ABOUT THE PROJECTS
+                            </NavLink>
+                        </div>
                     </div>
+                )}
 
-                </div>}
             </div>
 
         </header>
