@@ -58,7 +58,7 @@ function App() {
                 borderRadius: '5px'
               }}
             >
-              Working with distances is working with horizons!
+              Working with maps is working with new horizons!
             </motion.h1>
           </motion.div>
         )}
